@@ -1,28 +1,19 @@
 import {Component} from '@angular/core';
 
+export interface Post {
+    title: string;
+    text: string;
+    id?: number;
+}
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    arr = [1, 1, 2, 3, 5, 8, 13];
-    objs = [
-        {
-            title: 'Post 1', author: 'Vladilen', comments: [
-                {name: 'Max1', text: 'Loren1'},
-                {name: 'Max1', text: 'Loren2'},
-                {name: 'Max1', text: 'Loren3'},
-            ]
-        },
-        {
-            title: 'Post 2', author: 'Vladilen 2', comments: [
-                {name: 'Max2', text: 'Loren1'},
-                {name: 'Max2', text: 'Loren2'},
-                {name: 'Max2', text: 'Loren3'},
-            ]
-        }
+    posts: Post[] = [
+        {title: 'Хочу выучить Angular компоненты', text: 'Я все еще учу компоненты', id: 1},
+        {title: 'Следующий блок', text: 'Будет блок про директивы и еще про пайпы', id: 2}
     ];
-
-    now: Date = new Date();
 }
