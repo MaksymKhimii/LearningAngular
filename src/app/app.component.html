@@ -13,13 +13,6 @@
                 <small *ngIf="form.get('email').errors.email">
                     Please, enter the correct email!
                 </small>
-                <small *ngIf="form.get('email').errors.restrictedEmail">
-                    This email {{form.get('email').value}} is banned!
-                </small>
-
-                <small *ngIf="form.get('email').errors.uniqEmail">
-                    This email {{form.get('email').value}} is busy!
-                </small>
             </div>
         </div>
 
@@ -38,40 +31,36 @@
             </div>
         </div>
 
-        <div class="card" formGroupName="address">
+        <div class="card">
             <h2>Адрес</h2>
 
             <div class="form-control">
                 <label>Страна</label>
 
-                <select formControlName="country">
-                    <option value="ua">Украина</option>
-                    <option value="fr">Франция</option>
-                    <option value="usa">США</option>
+                <select>
+                    <option value="ru">Украина</option>
+                    <option value="ua">Франция</option>
+                    <option value="by">США</option>
                 </select>
             </div>
 
             <div class="form-control">
-                <input type="text" formControlName="city" placeholder="City">
+                <input type="text">
             </div>
 
-            <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
+            <button class="btn" type="button">Выбрать столицу</button>
         </div>
 
-        <div class="card" formGroupName="skills">
+        <div class="card">
             <h2>Ваши навыки</h2>
-            <button class="btn" (click)="addSkill()">Добавить умение</button>
-
-            <div
-                    class="form-control"
-                    *ngFor="let control of form.get('skills').controls;
-                    let i = index">
-                <label>Skill {{i + 1}}</label>
-                <input type="text" [formControlName]="i">
+            <button class="btn">Добавить умение</button>
+            <div class="form-control">
+                <label></label>
+                <input type="text">
             </div>
         </div>
 
-        <button class="btn" type="submit" [disabled]="form.invalid || form.pending">Отправить</button>
+        <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
 
     </form>
 </div>
