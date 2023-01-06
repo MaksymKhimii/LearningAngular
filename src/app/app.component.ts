@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, forwardRef, OnInit, Provider} from '@angular/core';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {SwitchComponent} from './switch/switch.component';
+
 
 @Component({
     selector: 'app-root',
@@ -8,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class AppComponent implements OnInit {
     form: FormGroup;
+    appState = 'on';
 
     ngOnInit() {
         this.form = new FormGroup({
@@ -28,6 +31,10 @@ export class AppComponent implements OnInit {
             const formData = {...this.form.value};
             console.log('Form data: ', formData);
         }
+    }
+
+    handleChange() {
+        console.log(this.appState);
     }
 }
 
