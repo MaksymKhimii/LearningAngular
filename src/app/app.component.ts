@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+
+export interface Todo {
+    completed: boolean;
+    title: string;
+    id?: number;
+}
 
 @Component({
     selector: 'app-root',
@@ -7,27 +13,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    form: FormGroup;
+    todos: Todo[] = [];
 
-    ngOnInit() {
-        this.form = new FormGroup({
-            email: new FormControl('', [
-                Validators.email,
-                Validators.required
-            ]),
-            password: new FormControl(null, [
-                Validators.required,
-                Validators.minLength(6)
-            ])
-        });
+    constructor(private http: HttpClient) {
     }
 
-    submit() {
-        if (this.form.valid) {
-            console.log('Form:', this.form);
-            const formData = {...this.form.value};
-            console.log('Form data: ', formData);
-        }
+    ngOnInit() {
+        this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos/?_limit=2')
+            .subscribe(todos => {
+                console.log('Response: ', todos);
+                this.todos = todos;
+            });
     }
 }
 

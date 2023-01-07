@@ -1,68 +1,27 @@
 <div class="container">
-    <form class="card" [formGroup]="form" (ngSubmit)="submit()">
-        <h1>Angular Forms</h1>
+    <h1>Angular HttpClient</h1>
 
+    <div class="card">
         <div class="form-control">
-            <label>Email</label>
-            <input type="text" placeholder="Email" formControlName="email">
-            <div *ngIf="form.get('email').invalid && form.get('email').touched"
-                 class="validation">
-                <small *ngIf="form.get('email').errors.required">
-                    Field email can't be empty.
-                </small>
-                <small *ngIf="form.get('email').errors.email">
-                    Please, enter the correct email!
-                </small>
-            </div>
+            <input type="text" placeholder="Название">
         </div>
+        <button class="btn">Добавить</button>
+        <button class="btn">Загрузить</button>
+    </div>
 
-        <div class="form-control">
-            <label>Пароль</label>
-            <input type="password" placeholder="Пароль" formControlName="password">
-            <div *ngIf="form.get('password').invalid && form.get('password').touched"
-                 class="validation">
-                <small *ngIf="form.get('password').errors.required">
-                    Field password can't be empty.
-                </small>
-                <small *ngIf="form.get('password').errors.minlength">
-                    The minimal length of password is {{form.get('password').errors.minlength.requiredLength}} symbols.
-                    Now length is {{form.get('password').errors.minlength.actualLength}}
-                </small>
-            </div>
-        </div>
+    <hr>
 
-        <div class="card">
-            <h2>Адрес</h2>
+    <div class="card" *ngFor="let todo of todos">
+        <p>
+            <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
+            <span>
+        <button class="btn btn-danger">Удалить</button>
+        <button class="btn" [disabled]="todo.completed">Завершить</button>
+      </span>
+        </p>
+    </div>
 
-            <div class="form-control">
-                <label>Страна</label>
 
-                <select>
-                    <option value="ru">Украина</option>
-                    <option value="ua">Франция</option>
-                    <option value="by">США</option>
-                </select>
-            </div>
-
-            <div class="form-control">
-                <input type="text">
-            </div>
-
-            <button class="btn" type="button">Выбрать столицу</button>
-        </div>
-
-        <div class="card">
-            <h2>Ваши навыки</h2>
-            <button class="btn">Добавить умение</button>
-            <div class="form-control">
-                <label></label>
-                <input type="text">
-            </div>
-        </div>
-
-        <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
-
-    </form>
 </div>
 
 
