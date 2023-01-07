@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
     loading = false;
 
     todoTitle = '';
+    error = '';
 
     constructor(private todosService: TodosService) {
     }
@@ -39,9 +40,13 @@ export class AppComponent implements OnInit {
         this.loading = true;
         this.todosService.fetchTodos()
             .subscribe(todos => {
-                this.todos = todos;
-                this.loading = false;
-            });
+                    this.todos = todos;
+                    this.loading = false;
+                },
+                error => {
+                    this.error = error.message;
+                    console.log(error.message);
+                });
     }
 
     removeTodo(id: number) {

@@ -8,27 +8,31 @@
         <button class="btn" (click)="addTodo()">Добавить</button>
         <button class="btn" (click)="fetchTodos()">Загрузить</button>
     </div>
+    <p class="error" *ngIf="error; else todosBlock"> {{error}}</p>
+    <ng-template #todosBlock>
 
-    <hr>
-    <div *ngIf="!loading; else loadingBlock">
-        <div *ngIf="todos.length; else noTodos">
-        </div>
-        <div class="card" *ngFor="let todo of todos">
-            <p>
-                <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
-                <span>
+
+        <hr>
+        <div *ngIf="!loading; else loadingBlock">
+            <div *ngIf="todos.length; else noTodos">
+            </div>
+            <div class="card" *ngFor="let todo of todos">
+                <p>
+                    <span [class.completed]="todo.completed">{{todo.title | titlecase}}</span>
+                    <span>
         <button class="btn btn-danger" (click)="removeTodo(todo.id)">Удалить</button>
         <button class="btn" [disabled]="todo.completed" (click)="completeTodo(todo.id)">Завершить</button>
       </span>
-            </p>
+                </p>
+            </div>
         </div>
-    </div>
-    <ng-template #noTodos>
-        <p>Записей нет(</p>
-    </ng-template>
+        <ng-template #noTodos>
+            <p>Записей нет(</p>
+        </ng-template>
 
-    <ng-template #loadingBlock>
-        <p>Загрузка...</p>
+        <ng-template #loadingBlock>
+            <p>Загрузка...</p>
+        </ng-template>
     </ng-template>
 </div>
 
