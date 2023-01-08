@@ -1,6 +1,7 @@
 import {Component, ComponentFactoryResolver, ViewChild} from '@angular/core';
 import {ModalComponent} from './modal/modal.component';
 import {RefDirective} from './ref.directive';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,14 @@ import {RefDirective} from './ref.directive';
 export class AppComponent {
     @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
-    constructor(private resolver: ComponentFactoryResolver) {
+    constructor(private resolver: ComponentFactoryResolver,
+                private title: Title,
+                private meta: Meta) {
+        title.setTitle('AppComponent Page');
+        meta.addTags([
+            {name: 'keywords', content: 'angular,google,appcomponent'},
+            {name: 'description', content: 'this is app component'}
+        ]);
     }
 
     showModal() {
